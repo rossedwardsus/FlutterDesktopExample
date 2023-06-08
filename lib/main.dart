@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 //import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -354,6 +356,38 @@ class _MyHomePageState extends State<MyHomePage> {
                                 }
                                 return null;
                               },
+                            ),
+                            CupertinoTextFormFieldRow(
+                              prefix: const Text('Enter text'),
+                              placeholder: 'Enter text',
+                              validator: (String? value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a value';
+                                }
+                                return null;
+                              },
+                            ),
+                            CupertinoButton(
+                              onPressed: () {},
+                              child: const Text('Button'),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Validate returns true if the form is valid, or false otherwise.
+                                  if (_formKey.currentState!.validate()) {
+                                    // If the form is valid, display a snackbar. In the real world,
+                                    // you'd often call a server or save the information in a database.
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processing Data')),
+                                    );
+                                  }
+                                },
+                                child: const Text('Submit'),
+                              ),
                             ),
                           ],
                         ),
